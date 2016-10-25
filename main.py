@@ -16,8 +16,6 @@
 # pygame.mixer.Channel	—	Create a Channel object for controlling playback
 #
 #
-from _testbuffer import py_buffer_to_contiguous
-
 import pygame;
 import sys;
 from processes import *;
