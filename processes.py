@@ -45,7 +45,7 @@ def processes(bug,fps,totoalframes):
             p=classes.BugProjectile(bug.rect.x,bug.rect.y,"images\\projectiles\\fire.png");
         else:
             sound = pygame.mixer.Sound('music\\f1.ogg');
-            sound.play();
+            sound.play()
             p=classes.BugProjectile(bug.rect.x,bug.rect.y,"images\\projectiles\\frost.png");
         direction();
     spawn(fps,totoalframes);
@@ -86,6 +86,8 @@ def collisions():
     for fly in classes.Fly.List:
         projectiles=pygame.sprite.spritecollide(fly,classes.BugProjectile.List,True);
         for project in projectiles:
+            if fly.health<=0:
+                    break;
             if project.fire:
                 fly.health-=2*fly.half_health;
                 fly.image=pygame.image.load('images\\burnt_fly.png');
