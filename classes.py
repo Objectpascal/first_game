@@ -65,16 +65,24 @@ class Fly(BaseClass):
         self.amplitude,self.period=random.randint(20,140),random.randint(4,5)/100;
         self.itsfrozen=False;
         self.totalframes=0;
+        self.font=pygame.font.SysFont("consolas,arial",15);
 
+
+    def fly_hite_message(self,screen):
+        screen_text = self.font.render('+10', True, (255, 200, 0));
+        screen.blit(screen_text, ((self.rect.x+self.rect.width/2), self.rect.y-5));
 
 
     @staticmethod
-    def update_all(WIDTH,HEIGHT,FPS):
+    def update_all(WIDTH,HEIGHT,FPS,scren):
 
         for fly in Fly.List:
             fly.totalframes+=1;
             if fly.health<=0:
+
+
                 if fly.rect.y+fly.rect.height<HEIGHT:
+                    fly.fly_hite_message(scren);
                     fly.rect.y+=fly.vely;
             else:
                 fly.fly(WIDTH,FPS);
@@ -131,8 +139,6 @@ class BugProjectile(pygame.sprite.Sprite):
     def movement(WIDTH):
         for projectile in BugProjectile.List:
             projectile.rect.x+=projectile.velx;
-
-
 
 
 
