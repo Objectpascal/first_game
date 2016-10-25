@@ -2,6 +2,8 @@ import pygame,sys;
 import classes;
 import random;
 
+
+pygame.font.init();
 # PROCESSES
 from classes import Fly
 
@@ -49,7 +51,9 @@ def processes(bug,fps,totoalframes):
             p=classes.BugProjectile(bug.rect.x,bug.rect.y,"images\\projectiles\\frost.png");
         direction();
     spawn(fps,totoalframes);
-    collisions();
+    score_plus= collisions();
+    return score_plus;
+
 
 
     # key testing
@@ -62,8 +66,8 @@ def spawn(FPS,totoal_frams):
             x=640-40;
         fly=classes.Fly(x,130,"images\\fly.png");
 
-
 def collisions():
+    score=0;
     # #frezz flyes
     # for fly in classes.Fly.List:
     #     if pygame.sprite.spritecollide(fly,classes.BugProjectile.List,False):
@@ -89,6 +93,7 @@ def collisions():
             if fly.health<=0:
                     break;
             if project.fire:
+                score+=10;
                 fly.health-=2*fly.half_health;
                 fly.image=pygame.image.load('images\\burnt_fly.png');
             else:
@@ -99,4 +104,7 @@ def collisions():
                     fly.image=pygame.image.load('images\\frozen_fly.png');
                     fly.image=pygame.transform.flip(fly.image,True,False);
                 fly.velx=0;
+    return score;
 # PROCESSES
+
+
