@@ -58,8 +58,8 @@ def processes(bug,fps,totoalframes):
 
     # key testing
 def spawn(FPS,totoal_frams):
-    four_seconds=FPS*4;
-    if totoal_frams%four_seconds==0:
+    time_to_make_newFly=FPS*3;
+    if totoal_frams%time_to_make_newFly==0:
         r=random.randint(1,2);
         x=1;
         if r==2:
