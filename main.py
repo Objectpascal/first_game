@@ -23,7 +23,7 @@ import sys;
 from processes import *;
 from classes import *;
 
-
+score=0;
 WIDTH,HEIGHT=(640,360);
 pygame.init();
 pygame.mixer.init();
@@ -39,26 +39,33 @@ bug=Bug(0,HEIGHT-40,"images\\bug.png");
 s=pygame.mixer.Sound('music\\loop.wav');
 s.play(-1)
 
-while True:
-    #PROCESSES
-    processes(bug,FPS,total_frames);
 
+font=pygame.font.SysFont("consolas,arial",20);
+def score_to_screen():
+    screen_text=font.render('SCORE:'+str(score),True,(255,200,0));
+    screen.blit(screen_text,(10,10));
+while True:
+    screen.blit(background, (0, 0));
+    #PROCESSES
+    score_plus=processes(bug,FPS,total_frames);
+    score+=score_plus;
     # PROCESSES
 
 
     # LOGIC
 
     bug.motion(WIDTH,HEIGHT);
-    Fly.update_all(WIDTH,HEIGHT,FPS);
+    Fly.update_all(WIDTH,HEIGHT,FPS,screen);
     BugProjectile.movement(WIDTH);
     total_frames+=1;
     # LOGIC
 
 
     # DRAW
-    screen.blit(background,(0,0));
+
     BaseClass.allsprites.draw(screen);
     BugProjectile.List.draw(screen);
+    score_to_screen()
     pygame.display.flip();
     # DRAW
 
